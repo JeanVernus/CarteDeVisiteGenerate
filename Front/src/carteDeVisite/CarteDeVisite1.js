@@ -24,15 +24,15 @@ class CarteDeVisite1 extends Component {
   render() {
     const { Nom, Prenom, Poste, Societe, Slogan, Siret, Tel, Mail, Photo } = this.props;
     return (
-      <div className="cadreCarte">
-        <div><img className="floatCarte" src={logo} alt="" width="200px" heigth="150px"/></div>
-        <div><span>Non de la Société: {Societe}</span><span>{Slogan}</span></div>
-        <div><span>Nom: {Nom}</span><span>Prénom: {Prenom}</span><span>Poste:{ Poste}</span></div>
-        <div><span>Tel: {Tel}</span><span>Email: {Mail}</span></div>
-        <div><span>N° de Siret{Siret}</span></div>
-      </div>
+        <div className="cadreCarte">
+          <div><img className="floatCarte" src={logo} alt="" width="200px" heigth="150px" /></div>
+          <div><span>Non de la Société: {Societe}</span><span>{Slogan}</span></div>
+          <div><span>Nom: {Nom}</span><span>Prénom: {Prenom}</span><span>Poste:{Poste}</span></div>
+          <div><span>Tel: {Tel}</span><span>Email: {Mail}</span></div>
+          <div><span>N° de Siret{Siret}</span></div>
+        </div>
     );
-  } 
+  }
 }
 
 const mapStateToProps = (store) => ({
