@@ -1,0 +1,18 @@
+.cadreCarte{
+  background-color: wheat;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 2px 6px 10px 2px black; 
+  width: 500px;
+  height: 250px;
+  padding:5px
+}
+
+.cadreCarte span{
+  font-size: 20px;
+  color : teal
+}
+
+.floatCarte{
+  float: left
+}
