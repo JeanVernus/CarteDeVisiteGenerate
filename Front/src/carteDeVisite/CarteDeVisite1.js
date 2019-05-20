@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../CSS/Carte.css';
-import logo from '../Logo.png';
-
-
 
 class CarteDeVisite1 extends Component {
   constructor(props) {
@@ -24,12 +21,12 @@ class CarteDeVisite1 extends Component {
   render() {
     const { Nom, Prenom, Poste, Societe, Slogan, Siret, Tel, Mail, Photo } = this.props;
     return (
-        <div className="cadreCarte">
-          <div><img className="floatCarte" src={logo} alt="" width="200px" heigth="150px" /></div>
-          <div><span>Non de la Société: {Societe}</span><span>{Slogan}</span></div>
-          <div><span>Nom: {Nom}</span><span>Prénom: {Prenom}</span><span>Poste:{Poste}</span></div>
-          <div><span>Tel: {Tel}</span><span>Email: {Mail}</span></div>
-          <div><span>N° de Siret{Siret}</span></div>
+        <div className="cadreCarte1">
+          <div><img src={Photo} alt="" width="250px" heigth="150px" /></div>
+          <div><div><span>Nom: </span>{Nom}</div><br /><div><span>Prénom: </span>{Prenom}</div><br /><div><span>Poste: </span>{Poste}</div><br /></div>
+          <div><div><span>Email: </span>{Mail}</div><span>Tel :</span> {Tel}</div>
+          <div><span>Société: </span>{Societe}&nbsp;</div><div><span>Slogan: </span>{Slogan}</div>
+          <div><div><span>N° de Siret: </span>{Siret}</div></div>
         </div>
     );
   }

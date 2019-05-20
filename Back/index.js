@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mySql = require("mysql");
 const config = require("./configMySql.js")
 const bcrypt = require('bcrypt');
+const multer = require('multer');
 
 const port = 7770;
 
@@ -11,6 +12,18 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('sendImage'));
+
+var storageImage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'fileCard')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname)
+  }
+})
+
+var upload = multer({ storage: storageImage }).single('file')
 
 app.post('/register', (req, res) => {
   console.log(req.body);
@@ -28,15 +41,16 @@ app.post('/register', (req, res) => {
 })
 
 app.post('/sendLogin', (req, res) => {
-  console.log(req.body);
+  console.log('req.body', req.body);
   const Password = req.body.Password;
-  const loginUser = `SELECT * FROM User WHERE Identifiant = ${mySql.escape(req.body.Identifiant)}`
+  const loginUser = `SELECT * FROM User WHERE Email = ${mySql.escape(req.body.Email)}`
   config.query(loginUser, (err, resultLogUser) => {
     if (JSON.stringify(resultLogUser).indexOf('1') > 0) {
       console.log('resultLogUser', resultLogUser);
-      const newSql = `SELECT * FROM User WHERE Identifiant = ${mySql.escape(req.body.Identifiant)}`
-      config.query(newSql, (err, resultLogUser) => {
-        if (bcrypt.compareSync(Password, resultLogUser[0].Password)) {
+      const checkPass = `SELECT * FROM User WHERE Email = ${mySql.escape(req.body.Email)}`
+      config.query(checkPass, (err, resultcheckPass) => {
+        if (bcrypt.compareSync(Password, resultcheckPass[0].Password)) {
+          console.log('resultLogUser[0].Photo', resultLogUser[0].Photo,);     
           res.status(200).json({
             string: 'passOK',
             nomProfile: resultLogUser[0].Nom,
@@ -51,10 +65,33 @@ app.post('/sendLogin', (req, res) => {
           })
         }
         else {
-          res.status(300).json('err')
+          res.status(200).json('error')
         }
       })
     }
+    else {
+      res.status(200).json('error')
+    }
+  })
+})
+
+app.post('/sendImage', function (req, res) {
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err)
+    } else if (err) {
+      return res.status(500).json(err)
+    }
+    console.log('listfile', req.file.filename);
+    console.log('Email', req.query.Mail);
+    const insertImage = `UPDATE User SET Photo=${mySql.escape(req.file.filename)} WHERE Email=${mySql.escape(req.query.Mail)}`;
+    config.query(insertImage, (err1, resultInsertImage) => {
+      if (err1) {
+        console.log(err1);
+      }
+      console.log('resultInsertImage', resultInsertImage);
+    });
+    return res.status(200).send(req.file.filename)
   })
 })
 
@@ -68,7 +105,8 @@ app.post('/updateProfile', (req, res) => {
     Societe = ${mySql.escape(req.body.Societe)},
     Slogan = ${mySql.escape(req.body.Slogan)},
     Siret = ${mySql.escape(req.body.Siret)},
-    Telephone = ${mySql.escape(req.body.Tel)}
+    Telephone = ${mySql.escape(req.body.Tel)},
+    Photo =${mySql.escape(req.body.Photo)}
     WHERE Email = ${mySql.escape(Mail)}`
 
   config.query(updateProfile, (err, resultUpdateProfile) => {

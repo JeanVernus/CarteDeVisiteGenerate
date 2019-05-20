@@ -10,7 +10,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Identifiant: '',
+      Email: '',
       Password: '',
       res: '',
     };
@@ -21,16 +21,16 @@ class Login extends Component {
 
   handleChange(event, key) {
     this.setState({ [event.target.name]: event.target.value });
-    if (key === 'Identifiant') { this.setState({ Identifiant: event.target.value }); }
+    if (key === 'Email') { this.setState({ Email: event.target.value }); }
     if (key === 'Password') { this.setState({ Password: event.target.value }); }
   }
 
   sendLogin(event) {
     const { dispatch } = this.props;
-    const { Identifiant, Password } = this.state;
+    const { Email, Password } = this.state;
     event.preventDefault();
     Axios.post('http://localhost:7770/sendLogin', {
-      Identifiant,
+      Email,
       Password
     })
       .then(res => {
@@ -57,15 +57,15 @@ class Login extends Component {
             timeout: 2000,
           }).show();
         }
-      })
-        .catch(err => {
+        else {
           new Noty({
-            text: 'Erreur, mauvais mot de passe',
+            text: 'Mauvais mot de passe, ou mail déja utilisé',
             type: 'error',
             theme: 'sunset',
             timeout: 2000,
           }).show();
-        })
+        }
+      })
   }
 
   render() {
@@ -80,7 +80,7 @@ class Login extends Component {
           <div>
             <Form className="formLogin" onSubmit={this.sendLogin}>
               <Form.Group>
-                <Form.Input className="blockLogin" label="Identifiant: " placeholder="Identifiant" name="Identifiant" onChange={event => this.handleChange(event, 'Identifiant')} />
+                <Form.Input className="blockLogin" label="Email: " placeholder="Email" name="Email" onChange={event => this.handleChange(event, 'Email')} />
                 <Form.Input className="blockLogin" type="password" label="Mot de Pass: " placeholder="Mot de pass" name="Password" onChange={event => this.handleChange(event, 'Password')} />
               </Form.Group>
               <Button type="submit" color='teal' animated>
