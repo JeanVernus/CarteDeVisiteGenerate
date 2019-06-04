@@ -1,16 +1,17 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import Axios from 'axios';
 import { connect } from 'react-redux';
-import Profil from './Profil';
 import Noty from 'noty';
 import { Form, Button, Icon } from 'semantic-ui-react';
+import Profil from './Profil';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Identifiant: '',
+      Email: '',
       Password: '',
       res: '',
     };
@@ -21,16 +22,16 @@ class Login extends Component {
 
   handleChange(event, key) {
     this.setState({ [event.target.name]: event.target.value });
-    if (key === 'Identifiant') { this.setState({ Identifiant: event.target.value }); }
+    if (key === 'Email') { this.setState({ Email: event.target.value }); }
     if (key === 'Password') { this.setState({ Password: event.target.value }); }
   }
 
   sendLogin(event) {
     const { dispatch } = this.props;
-    const { Identifiant, Password } = this.state;
+    const { Email, Password } = this.state;
     event.preventDefault();
     Axios.post('http://localhost:7770/sendLogin', {
-      Identifiant,
+      Email,
       Password
     })
       .then(res => {
@@ -49,7 +50,7 @@ class Login extends Component {
         if (res.data.string === 'passOK') {
           this.setState({
             res: res.data.string,
-          })
+          });
           new Noty({
             text: 'Connexion réussie',
             type: 'success',
@@ -57,43 +58,50 @@ class Login extends Component {
             timeout: 2000,
           }).show();
         }
-      })
-        .catch(err => {
+        if (res.data === 'badMail') {
           new Noty({
-            text: 'Erreur, mauvais mot de passe',
-            type: 'error',
+            text: 'Email et mot de passe ne correspondent pas',
+            type: 'alert',
             theme: 'sunset',
             timeout: 2000,
           }).show();
-        })
+        }
+      })
+      .catch(err => {
+        new Noty({
+          text: 'Erreur, mauvais mot de passe',
+          type: 'error',
+          theme: 'sunset',
+          timeout: 2000,
+        }).show();
+      });
   }
 
   render() {
     const { res } = this.state;
-    if (res === "passOK") {
-      return <div><Profil /></div>
+    if (res === 'passOK') {
+      return <div><Profil /></div>;
     }
-    else {
-      return (
+
+    return (
+      <div>
+        <h2 className="connection">Connexion</h2>
         <div>
-          <h2 className="connection">Connexion</h2>
-          <div>
-            <Form className="formLogin" onSubmit={this.sendLogin}>
-              <Form.Group>
-                <Form.Input className="blockLogin" label="Identifiant: " placeholder="Identifiant" name="Identifiant" onChange={event => this.handleChange(event, 'Identifiant')} />
-                <Form.Input className="blockLogin" type="password" label="Mot de Pass: " placeholder="Mot de pass" name="Password" onChange={event => this.handleChange(event, 'Password')} />
-              </Form.Group>
-              <Button type="submit" color='teal' animated>
-                <Button.Content visible>Soumettre</Button.Content>
-                <Button.Content hidden>
-                  <Icon name='arrow right' />
-                </Button.Content>
-              </Button>
-            </Form>
-          </div>
+          <Form className="formLogin" onSubmit={this.sendLogin}>
+            <Form.Group>
+              <Form.Input className="blockLogin" label="Email: " placeholder="Email" name="Email" onChange={event => this.handleChange(event, 'Email')} />
+              <Form.Input className="blockLogin" type="password" label="Mot de Pass: " placeholder="Mot de pass" name="Password" onChange={event => this.handleChange(event, 'Password')} />
+            </Form.Group>
+            <Button type="submit" color="teal" animated>
+              <Button.Content visible>Soumettre</Button.Content>
+              <Button.Content hidden>
+                <Icon name="arrow right" />
+              </Button.Content>
+            </Button>
+          </Form>
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 

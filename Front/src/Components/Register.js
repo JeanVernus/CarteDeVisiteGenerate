@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { Form, Button, Icon } from 'semantic-ui-react';
 import Axios from 'axios';
@@ -8,10 +9,10 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Identifiant: "",
-      Password: "",
-      Email: "",
-      Confirm: ""
+      Identifiant: '',
+      Password: '',
+      Email: '',
+      Confirm: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.postRegister = this.postRegister.bind(this);
@@ -26,7 +27,9 @@ class Register extends Component {
   }
 
   postRegister(event) {
-    const { Confirm, Password, Identifiant, Email } = this.state;
+    const {
+      Confirm, Password, Identifiant, Email
+    } = this.state;
     event.preventDefault();
     if (Confirm === Password) {
       Axios.post('http://localhost:7770/register', {
@@ -35,7 +38,7 @@ class Register extends Component {
         Email
       })
         .then(res => {
-          if (res.data === "register ok") {
+          if (res.data === 'register ok') {
             new Noty({
               text: 'Enregistrement effectué',
               type: 'success',
@@ -43,7 +46,7 @@ class Register extends Component {
               timeout: 2000,
             }).show();
           }
-          if (res.data === "error") {
+          if (res.data === 'error') {
             new Noty({
               text: 'Email déjà utilisé',
               type: 'warning',
@@ -53,8 +56,7 @@ class Register extends Component {
           }
           console.log(res);
         });
-    }
-    else {
+    } else {
       new Noty({
         text: 'Erreur, mauvais mot de passe',
         type: 'error',
@@ -81,7 +83,7 @@ class Register extends Component {
             <Button type="submit" color="teal" animated>
               <Button.Content visible>Soumettre</Button.Content>
               <Button.Content hidden>
-                <Icon name='arrow right' />
+                <Icon name="arrow right" />
               </Button.Content>
             </Button>
           </Form>

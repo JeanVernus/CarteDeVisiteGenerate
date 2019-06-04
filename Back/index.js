@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/register', (req, res) => {
-  console.log(req.body);
+  console.log("req.body", req.body);
   const Password = bcrypt.hashSync(req.body.Password, 10);
-  const addUsers = `INSERT INTO User (Identifiant, Email, Password) VALUES (${mySql.escape(req.body.Identifiant)}, ${mySql.escape(req.body.Email)}, ${mySql.escape(Password)})`
+  const addUsers = `INSERT INTO Users (Identifiant, Email, Password) VALUES (${mySql.escape(req.body.Identifiant)}, ${mySql.escape(req.body.Email)}, ${mySql.escape(Password)})`
   config.query(addUsers, (err, resultAddUsers) => {
     if (err) {
       res.status(200).json('error')
@@ -30,11 +30,11 @@ app.post('/register', (req, res) => {
 app.post('/sendLogin', (req, res) => {
   console.log(req.body);
   const Password = req.body.Password;
-  const loginUser = `SELECT * FROM User WHERE Identifiant = ${mySql.escape(req.body.Identifiant)}`
+  const loginUser = `SELECT * FROM Users WHERE Email = ${mySql.escape(req.body.Email)}`
   config.query(loginUser, (err, resultLogUser) => {
     if (JSON.stringify(resultLogUser).indexOf('1') > 0) {
       console.log('resultLogUser', resultLogUser);
-      const newSql = `SELECT * FROM User WHERE Identifiant = ${mySql.escape(req.body.Identifiant)}`
+      const newSql = `SELECT * FROM Users WHERE Email = ${mySql.escape(req.body.Email)}`
       config.query(newSql, (err, resultLogUser) => {
         if (bcrypt.compareSync(Password, resultLogUser[0].Password)) {
           res.status(200).json({
@@ -50,6 +50,10 @@ app.post('/sendLogin', (req, res) => {
             photoProfile: resultLogUser[0].Photo,
           })
         }
+        else if (resultLogUser[0].Email !== req.body.Email) {
+          res.status(200).json(
+            'badMail')
+        }
         else {
           res.status(300).json('err')
         }
@@ -61,7 +65,7 @@ app.post('/sendLogin', (req, res) => {
 app.post('/updateProfile', (req, res) => {
   console.log(req.body);
   const Mail = req.body.Mail;
-  const updateProfile = `UPDATE User SET 
+  const updateProfile = `UPDATE Users SET 
     Nom = ${mySql.escape(req.body.Nom)},
     Prenom = ${mySql.escape(req.body.Prenom)},
     Poste = ${mySql.escape(req.body.Poste)},
@@ -77,7 +81,10 @@ app.post('/updateProfile', (req, res) => {
       console.log(err);
     }
     console.log('resultChange', resultUpdateProfile);
-    res.status(200).json(resultUpdateProfile);
+    res.status(200).json({
+      string: "updateOk",
+      result: resultUpdateProfile
+    });
   })
 })
 
