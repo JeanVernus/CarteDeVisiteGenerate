@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
@@ -57,11 +59,10 @@ class Login extends Component {
             theme: 'sunset',
             timeout: 2000,
           }).show();
-        }
-        if (res.data === 'badMail') {
+        } else {
           new Noty({
-            text: 'Email et mot de passe ne correspondent pas',
-            type: 'alert',
+            text: 'Mauvais mot de passe, ou mail déja utilisé',
+            type: 'error',
             theme: 'sunset',
             timeout: 2000,
           }).show();

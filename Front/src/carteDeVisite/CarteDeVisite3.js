@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../CSS/Carte.css';
-import logo from '../Logo.png';
-
 
 class CarteDeVisite3 extends Component {
   constructor(props) {
@@ -23,12 +21,12 @@ class CarteDeVisite3 extends Component {
   render() {
     const { Nom, Prenom, Poste, Societe, Slogan, Siret, Tel, Mail, Photo } = this.props;
     return (
-      <div className="cadreCarte">
-        <div><img className="floatCarte" src={logo} alt="" width="200px" heigth="150px"/></div>
-        <div><span>Non de la Société: {Societe}</span><span>{Slogan}</span></div>
-        <div><span>Nom: {Nom}</span><span>Prénom: {Prenom}</span><span>Poste:{ Poste}</span></div>
-        <div><span>Tel: {Tel}</span><span>Email: {Mail}</span></div>
-        <div><span>N° de Siret{Siret}</span></div>
+      <div className="cadreCarte3">
+        <div><img src={Photo} alt="" width="200px" heigth="150px"/></div>
+        <div><span>Non de la Société: </span>{Societe}<span>Slogan: </span>{Slogan}</div>
+        <div><span>Nom: </span>{Nom}<span>Prénom: </span>{Prenom}<span>Poste: </span>{ Poste}</div>
+        <div><span>Tel: </span>{Tel}<span>Email: </span>{Mail}</div>
+        <div><span>N° de Siret: </span>{Siret}</div>
       </div>
     );
   } 

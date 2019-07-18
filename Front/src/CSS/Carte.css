@@ -1,18 +1,142 @@
-.cadreCarte{
+/* Carte 1 */
+
+.cadreCarte1{
   background-color: wheat;
   display: flex;
   flex-wrap: wrap;
   box-shadow: 2px 6px 10px 2px black; 
   width: 500px;
   height: 250px;
-  padding:5px
+  padding:5px;
+  font-size:30px;
+;
 }
 
-.cadreCarte span{
-  font-size: 20px;
-  color : teal
+.cadreCarte1 span{
+  font-size: 30px;
+  color : teal;
+  font-family: cursive;
 }
 
-.floatCarte{
-  float: left
+/* Carte 2 */
+
+.cadreCarte2{
+  border: 2px solid blueviolet;
+  background-image:url('../Logo2.png');
+  background-size: cover ;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 2px 6px 10px 2px black; 
+  width: 500px;
+  height: 250px;
+  font-size:30px;
+  padding:5px;
+
+  font-family: cursive;
+}
+
+.cadreCarte2 img{
+  border: 3px solid blueviolet;
+}
+
+.cadreCarte2 span{
+  font-size: 30px;
+  color : teal;
+  font-family: cursive;
+}
+
+/* Carte 3 */
+
+.cadreCarte3{
+  background-color:black;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 2px 6px 10px 2px black; 
+  width: 500px;
+  height: 250px;
+  font-size:30px;
+  padding: 5px;
+  color:  white;
+}
+.cadreCarte3 img{
+  margin-left: 65%;
+  border: 3px solid teal;
+}
+
+.cadreCarte3 span{
+  color: teal;
+}
+
+/* Carte 4 */
+
+.cadreCarte4{
+  background-color:black;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 2px 6px 10px 2px black; 
+  width: 500px;
+  height: 250px;
+  font-size:30px;
+  padding: px;
+  color:  white;
+  font-family: impact;
+}
+.cadreCarte4 img{
+  border: 2px double red;
+  width: 498px;
+  max-height: 100px;
+}
+
+.cadreCarte4 span{
+  color: red;
+  font-family: impact;
+}
+
+/* Carte 5 */
+
+.cadreCarte5{
+  background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 2px 6px 10px 2px black; 
+  width: 500px;
+  height: 250px;
+  font-size:30px;
+  padding: px;
+  color:  white;
+  -webkit-text-stroke: 0.5px;
+  -webkit-text-stroke-color: greenyellow;
+}
+.cadreCarte5 img{
+  border: 2px double greenyellow;
+  width: 498px;
+  max-height: 100px;
+}
+
+.cadreCarte5 span{
+  color: black;
+}
+
+/* Carte 5 */
+
+.cadreCarte6{
+  background-image: linear-gradient(to right top, darkgrey, grey, orange, coral, #d33710);
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 2px 6px 10px 2px grey; 
+  width: 500px;
+  height: 250px;
+  font-size:30px;
+  padding: px;
+  color:  white;
+  -webkit-text-stroke: 0.5px;
+  -webkit-text-stroke-color: coral;
+}
+.cadreCarte6 img{
+  border : 65%;
+  border: 2px double coral;
+}
+
+.cadreCarte6 span{
+  color: black;
 }

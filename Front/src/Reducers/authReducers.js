@@ -14,7 +14,7 @@ export default function (store = {}, action ){
         siretProfile,
         telProfile,
         mailProfile,
-        photoProfil
+        photoProfile
       } = action;
       return {
         ...store,
@@ -26,7 +26,7 @@ export default function (store = {}, action ){
         siretProfile,
         telProfile,
         mailProfile,
-        photoProfil
+        photoProfile
       }
     }
     default:
