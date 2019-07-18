@@ -33,6 +33,8 @@ Plus une interface admin pour re-styliser les cartes de visite aléatoires ( en 
 
 1. clône le respository gitHub : https://github.com/JeanVernus/CarteDeVisiteGenerate
 
+1. Pull la branch jeanV pour les dernières mises à jours
+
 1. #### Installer npm et ces dépendences dans le /Front et /Back
       . npm install
 1. #### installer nodemon en global
