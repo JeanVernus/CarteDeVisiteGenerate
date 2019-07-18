@@ -35,6 +35,8 @@ Plus une interface admin pour re-styliser les cartes de visite aléatoires
 
 1. #### Installer npm et ces dépendences dans le /Front et /Back
       . npm install
+1. #### installer nodemon en global
+      . npm i nodemon -g
 1. #### Lancer le server
       . nodemon index.js
 1. #### Lancer le programme
