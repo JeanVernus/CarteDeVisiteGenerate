@@ -4,7 +4,7 @@
 ## Site de generation de carte de visite.
 
 Je propose ici une interface web simple permettant de généré des cartes de visite après avoir rentré quelques informations dans un formulaire et d'y avoir ajouter une photo ou un logo.
-Plus une interface admin pour re-styliser les cartes de visite aléatoires
+Plus une interface admin pour re-styliser les cartes de visite aléatoires ( en cours de développement)
 
 ### Technos utilisées
 
