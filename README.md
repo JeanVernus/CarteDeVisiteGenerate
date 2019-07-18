@@ -37,6 +37,14 @@ Plus une interface admin pour re-styliser les cartes de visite aléatoires
       . npm install
 1. #### installer nodemon en global
       . npm i nodemon -g
+1. #### installer sql my server
+      . apt update
+      . apt install mysql-server
+1. #### installer et configurer phpmyadmin
+      . apt install -g phpmyadmin
+      . suivez les instructions pour configurer simplement phpmyadmin en localhost
+      . importer dans votre nouvel bases de donner le fichier Users.sql que vous trouverez dans ce package
+      . enfin modifier le fichier configMySql.js dans le back de se package par les informations rentrées pendant la                   configuration de votre base de données phpmyadmin
 1. #### Lancer le server
       . nodemon index.js
 1. #### Lancer le programme
